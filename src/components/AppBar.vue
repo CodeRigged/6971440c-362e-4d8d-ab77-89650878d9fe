@@ -1,13 +1,40 @@
 <script setup>
-import { computed } from "vue";
+import { useEventsStore } from "../store/index";
+import { storeToRefs } from "pinia";
+import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
+
+const eventStore = useEventsStore();
+
+const { cart, search } = storeToRefs(eventStore);
 </script>
 
 <template>
   <v-app-bar color="primary">
     <v-app-bar-title>Teclead Events App</v-app-bar-title>
-
     <v-spacer></v-spacer>
+
+    <v-menu width="400" open-on-hover>
+      <template v-slot:activator="{ props }">
+        <v-btn class="mr-2" v-bind="props"> Sort </v-btn>
+      </template>
+      <v-sheet class="pa-2">
+        <v-list>
+          <v-list-item
+            @click="eventStore.sortEvents(false)"
+            title="Ascending"
+            append-icon="sort-ascending"
+          >
+          </v-list-item>
+          <v-list-item
+            @click="eventStore.sortEvents(true)"
+            title="Descending"
+            append-icon="sort-descending"
+          >
+          </v-list-item>
+        </v-list>
+      </v-sheet>
+    </v-menu>
     <v-text-field
       density="compact"
       v-model="search"
@@ -17,8 +44,35 @@ import { useRoute } from "vue-router";
       hide-details
     ></v-text-field>
 
-    <v-btn icon>
-      <v-icon>mdi-account</v-icon>
+    <v-btn class="ml-6 text-none" stacked>
+      <v-icon>mdi-account-outline</v-icon>
     </v-btn>
+
+    <v-menu width="400" open-on-hover>
+      <template v-slot:activator="{ props }">
+        <v-btn v-bind="props" class="text-none" stacked>
+          <v-badge :content="cart.length">
+            <v-icon>mdi-basket-outline</v-icon>
+          </v-badge>
+        </v-btn>
+      </template>
+      <v-card class="pa-2">
+        <v-card-text v-if="cart.length === 0">No events selected.</v-card-text>
+
+        <v-list v-else>
+          <v-list-item v-for="(event, index) in cart" :key="index">
+            <v-list-item-title>{{ event.title }}</v-list-item-title>
+            <template v-slot:append>
+              <v-btn
+                size="small"
+                flat
+                icon="mdi-minus"
+                @click="eventStore.removeFromCart(event)"
+              ></v-btn>
+            </template>
+          </v-list-item>
+        </v-list>
+      </v-card>
+    </v-menu>
   </v-app-bar>
 </template>

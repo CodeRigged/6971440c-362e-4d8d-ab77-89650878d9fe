@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <app-bar />
-    <v-main class="bg-grey-lighten-5">
+    <v-main scrollable class="bg-grey-lighten-5">
       <loading-overlay v-if="isLoading" />
       <div class="pt-0 pl-4 pr-4 pb-4">
         <router-view
