@@ -1,15 +1,17 @@
 const formatDate = (input: string | number | Date, short?: boolean) => {
   const date = new Date(input);
-  let options = short
-    ? {
-        timeZone: "Europe/London",
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-      }
-    : ({
-        timeZone: "Europe/London",
-      } as Intl.DateTimeFormatOptions);
+  let options = (
+    short
+      ? {
+          timeZone: "Europe/London",
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        }
+      : {
+          timeZone: "Europe/London",
+        }
+  ) as Intl.DateTimeFormatOptions;
 
   const correctDate = new Date(date.getTime() + 1 * 60 * 60 * 1000);
 
