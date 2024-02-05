@@ -23,13 +23,13 @@ const { cart, search } = storeToRefs(eventStore);
           <v-list-item
             @click="eventStore.sortEvents(false)"
             title="Ascending"
-            append-icon="sort-ascending"
+            append-icon="mdi-sort-ascending"
           >
           </v-list-item>
           <v-list-item
             @click="eventStore.sortEvents(true)"
             title="Descending"
-            append-icon="sort-descending"
+            append-icon="mdi-sort-descending"
           >
           </v-list-item>
         </v-list>
