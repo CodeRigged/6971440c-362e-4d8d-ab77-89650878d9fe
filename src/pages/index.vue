@@ -18,14 +18,13 @@
     </v-sheet>
     <v-row class="pa-3">
       <v-col cols="4" v-for="event in group.events" :key="event._id">
-        <Event :event="event"></Event>
+        <event :event="event" />
       </v-col>
     </v-row>
   </div>
 </template>
 
 <script lang="ts" setup>
-import Event from "../components/Event.vue";
 import { storeToRefs } from "pinia";
 import { computed, onBeforeMount } from "vue";
 import { useEventsStore } from "../store/index";

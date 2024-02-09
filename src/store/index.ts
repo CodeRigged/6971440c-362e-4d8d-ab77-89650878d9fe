@@ -41,6 +41,7 @@ type State = {
   events: Event[];
   isLoading: boolean;
   search?: string;
+  descending: boolean;
 };
 
 export const useEventsStore = defineStore("customers", {
@@ -49,6 +50,7 @@ export const useEventsStore = defineStore("customers", {
     events: [],
     isLoading: false,
     search: undefined,
+    descending: false,
   }),
   getters: {
     earliestAndLatestEventDates({ events }) {
@@ -63,8 +65,8 @@ export const useEventsStore = defineStore("customers", {
       const groupedEvents = events.reduce(
         (group, event) => {
           if (
-            search?.toLowerCase() &&
-            !event.title.toLowerCase().includes(search)
+            search &&
+            !event.title.toLowerCase().includes(search.toLowerCase())
           ) {
             return group;
           }
@@ -96,17 +98,20 @@ export const useEventsStore = defineStore("customers", {
           "/data/london-events.json"
         );
 
-        this.events = fetchRequest.data;
-        this.sortEvents(false);
+        this.events = fetchRequest.data.map((e) => {
+          e.venue.direction = `https://www.google.com/maps/dir/${e.venue.name}`;
+          return e;
+        });
+        this.sortEvents();
       } catch (error) {
         console.log(error);
       }
       this.isLoading = false;
     },
 
-    sortEvents(descending: boolean) {
+    sortEvents() {
       this.events = this.events.sort((a, b) => {
-        if (descending) {
+        if (this.descending) {
           return new Date(b.date).getTime() - new Date(a.date).getTime();
         } else {
         }
@@ -127,6 +132,9 @@ export const useEventsStore = defineStore("customers", {
       this.events.push(event);
       this.cart.splice(eventId, 1);
       this.sortEvents();
+    },
+    setDescending(descending: boolean) {
+      this.descending = descending;
     },
   },
 });

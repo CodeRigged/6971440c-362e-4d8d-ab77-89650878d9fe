@@ -6,7 +6,7 @@ import { useRoute } from "vue-router";
 
 const eventStore = useEventsStore();
 
-const { cart, search } = storeToRefs(eventStore);
+const { cart, search, descending } = storeToRefs(eventStore);
 </script>
 
 <template>
@@ -21,13 +21,19 @@ const { cart, search } = storeToRefs(eventStore);
       <v-sheet class="pa-2">
         <v-list>
           <v-list-item
-            @click="eventStore.sortEvents(false)"
+            @click="
+              eventStore.setDescending(false);
+              eventStore.sortEvents();
+            "
             title="Ascending"
             append-icon="mdi-sort-ascending"
           >
           </v-list-item>
           <v-list-item
-            @click="eventStore.sortEvents(true)"
+            @click="
+              eventStore.setDescending(true);
+              eventStore.sortEvents();
+            "
             title="Descending"
             append-icon="mdi-sort-descending"
           >

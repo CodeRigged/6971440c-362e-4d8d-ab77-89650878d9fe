@@ -1,6 +1,6 @@
 const formatDate = (input: string | number | Date, short?: boolean) => {
   const date = new Date(input);
-  let options = (
+  const options = (
     short
       ? {
           timeZone: "Europe/London",
