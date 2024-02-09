@@ -26,13 +26,13 @@
 
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
-import { computed, onBeforeMount } from "vue";
+import { onBeforeMount } from "vue";
 import { useEventsStore } from "../store/index";
 import { formatDate } from "../utils/index";
 
 const eventStore = useEventsStore();
 
-const { events, eventsGroupedByDate, earliestAndLatestEventDates } =
+const { eventsGroupedByDate, earliestAndLatestEventDates } =
   storeToRefs(eventStore);
 
 onBeforeMount(async () => {

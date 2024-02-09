@@ -114,8 +114,8 @@ export const useEventsStore = defineStore("customers", {
         if (this.descending) {
           return new Date(b.date).getTime() - new Date(a.date).getTime();
         } else {
+          return new Date(a.date).getTime() - new Date(b.date).getTime();
         }
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
       });
     },
 

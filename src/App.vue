@@ -10,7 +10,7 @@
           v-slot="{ Component }"
         >
           <transition name="slide-fade" mode="out-in">
-            <div>
+            <div v-if="Component">
               <component :is="Component" />
             </div>
           </transition>
@@ -21,10 +21,7 @@
 </template>
 
 <script lang="ts" setup>
-import AppBar from "./components/AppBar.vue";
-
 import { storeToRefs } from "pinia";
-import { onBeforeMount } from "vue";
 import { useEventsStore } from "./store/index";
 
 const eventStore = useEventsStore();

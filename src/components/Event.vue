@@ -47,7 +47,7 @@
         <v-col cols="1"></v-col>
         <v-col>
           End:
-          {{ formatDate(startTime) }}
+          {{ formatDate(endTime) }}
         </v-col>
       </v-row>
     </v-card-text>
@@ -75,10 +75,4 @@ const props = defineProps({
 });
 
 const { title, flyerFront, venue, startTime, endTime } = props.event;
-var dateFormatOptions = {
-  weekday: "numeric",
-  year: "numeric",
-  month: "numeric",
-  day: "numeric",
-};
 </script>

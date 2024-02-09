@@ -1,12 +1,10 @@
 <script setup>
 import { useEventsStore } from "../store/index";
 import { storeToRefs } from "pinia";
-import { computed, ref } from "vue";
-import { useRoute } from "vue-router";
 
 const eventStore = useEventsStore();
 
-const { cart, search, descending } = storeToRefs(eventStore);
+const { cart, search } = storeToRefs(eventStore);
 </script>
 
 <template>
