@@ -139,4 +139,4 @@ export const useEventsStore = defineStore("customers", {
   },
 });
 
-export type { Event, Artist, Venue };
+export type { Artist, Event, Venue };

@@ -23,7 +23,7 @@ const formatDate = (input: string | number | Date, short?: boolean) => {
 };
 
 function isValidDate(d: any) {
-  return d instanceof Date && !isNaN(d);
+  return !isNaN(d) && d instanceof Date;
 }
 
 export { formatDate };
